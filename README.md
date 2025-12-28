@@ -23,6 +23,48 @@ A full-stack task management application built with Laravel backend and React fr
 
 ## Quick Start (SQLite - Default)
 
+
+2. **Clone Repository**
+   ```bash
+   git clone https://github.com/Rajendra371/my_task_manager_app.git
+   cd my_task_manager_app
+   ```
+
+3. **Add to Herd**
+   - Open Herd application
+   - Click "Add Site" or drag project folder to Herd
+   - Herd will automatically detect Laravel project
+
+4. **Install Dependencies**
+   ```bash
+   composer install
+   npm install
+   ```
+
+5. **Environment Setup**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+6. **Database Setup**
+   ```bash
+   php artisan migrate
+   php artisan db:seed
+   ```
+
+7. **Build Frontend**
+   ```bash
+   npm run build
+   ```
+
+8. **Access Application**
+   - React App: https://my-task-manager-app.test/app
+   - Admin Dashboard: https://my-task-manager-app.test/dashboard
+   - Admin Login: admin@example.com / password
+
+### Option B: Traditional Setup
+
 1. **Clone Repository**
    bash
    git clone <repository-url>
@@ -61,23 +103,24 @@ A full-stack task management application built with Laravel backend and React fr
    - Admin Dashboard: http://localhost:8000/dashboard
    - Admin Login: admin@example.com / password
 
-## MySQL Database Setup
 
-If you prefer MySQL over SQLite, follow these steps:
 
-### Prerequisites
-- XAMPP/WAMP/MAMP or standalone MySQL server
-- MySQL 8.0+ recommended
 
-### Step 1: Create MySQL Database
-```sql
-CREATE DATABASE task_manager;
-CREATE USER 'task_user'@'localhost' IDENTIFIED BY 'your_password';
-GRANT ALL PRIVILEGES ON task_manager.* TO 'task_user'@'localhost';
-FLUSH PRIVILEGES;
-```
+### Setup Instructions
 
-### Step 2: Update Environment Configuration
+#### For Standalone MySQL:
+1. **Install MySQL Server**
+2. **Create Database:**
+   ```sql
+   CREATE DATABASE task_manager;
+   CREATE USER 'task_user'@'localhost' IDENTIFIED BY 'your_password';
+   GRANT ALL PRIVILEGES ON task_manager.* TO 'task_user'@'localhost';
+   FLUSH PRIVILEGES;
+   ```
+
+
+
+### Update Environment Configuration
 Edit `.env` file:
 
 ```env
@@ -133,68 +176,7 @@ DB::connection()->getPdo();
 // Should return PDO instance without errors
 
 
-## GitHub Repository Setup
 
-To push this project to GitHub and enable auto-updates:
-
-### Step 1: Initialize Git Repository
-```bash
-# Initialize git in project directory
-git init
-
-# Add all files to git
-git add .
-
-# Create initial commit
-git commit -m "Initial commit: Laravel + React Task Manager"
-```
-
-### Step 2: Create GitHub Repository
-1. Go to [GitHub.com](https://github.com) and login
-2. Click "New Repository" or go to [github.com/new](https://github.com/new)
-3. Repository name: `task-manager` (or your preferred name)
-4. Description: `Laravel + React Task Management Application`
-5. Set to **Public** or **Private**
-6. **DO NOT** initialize with README (we already have one)
-7. Click "Create Repository"
-
-### Step 3: Connect Local to GitHub
-```bash
-# Add GitHub remote (replace YOUR_USERNAME and REPO_NAME)
-git remote add origin https://github.com/YOUR_USERNAME/REPO_NAME.git
-
-# Push to GitHub
-git branch -M main
-git push -u origin main
-```
-
-### Step 4: Future Updates
-```bash
-# Add changes
-git add .
-
-# Commit with message
-git commit -m "Add new feature or fix"
-
-# Push to GitHub
-git push
-```
-
-### Step 5: Clone Repository (For Others)
-```bash
-# Clone the repository
-git clone https://github.com/YOUR_USERNAME/REPO_NAME.git
-cd REPO_NAME
-
-# Install dependencies
-composer install
-npm install
-
-# Setup environment
-cp .env.example .env
-php artisan key:generate
-php artisan migrate --seed
-```
 
 ## Default Users
 

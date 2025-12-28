@@ -84,7 +84,13 @@ const PermissionRow = ({ user, onUpdate }) => {
 const TaskApp = () => {
   // Auth state
   const [user, setUser] = useState(null);
-  const [userPermissions, setUserPermissions] = useState(null);
+  const [userPermissions, setUserPermissions] = useState({
+    can_create: true,
+    can_view: true,
+    can_edit: true,
+    can_update: true,
+    can_delete: false
+  }); // Set default permissions immediately
   const [token, setToken] = useState(null);
   const [isLogin, setIsLogin] = useState(true);
   const [authLoading, setAuthLoading] = useState(false);
@@ -160,32 +166,17 @@ const TaskApp = () => {
           const permData = JSON.parse(cleanPermText);
           const currentUserPerms = permData.find(u => u.id === userData.id);
           
-          // Set permissions with proper defaults
-          const permissions = currentUserPerms?.permissions || {
-            can_create: true,
-            can_view: true,
-            can_edit: true,
-            can_update: true,
-            can_delete: false
-          };
-          
-          // Ensure all permission properties exist
-          setUserPermissions({
-            can_create: permissions.can_create !== false,
-            can_view: permissions.can_view !== false,
-            can_edit: permissions.can_edit !== false,
-            can_update: permissions.can_update !== false,
-            can_delete: permissions.can_delete === true
-          });
-        } else {
-          // Default permissions if API call fails
-          setUserPermissions({
-            can_create: true,
-            can_view: true,
-            can_edit: true,
-            can_update: true,
-            can_delete: false
-          });
+          // Update permissions if found, otherwise keep defaults
+          if (currentUserPerms?.permissions) {
+            const permissions = currentUserPerms.permissions;
+            setUserPermissions({
+              can_create: permissions.can_create !== false,
+              can_view: permissions.can_view !== false,
+              can_edit: permissions.can_edit !== false,
+              can_update: permissions.can_update !== false,
+              can_delete: permissions.can_delete === true
+            });
+          }
         }
       } else {
         localStorage.removeItem('token');
@@ -282,7 +273,13 @@ const TaskApp = () => {
   const handleLogout = () => {
     setToken(null);
     setUser(null);
-    setUserPermissions(null);
+    setUserPermissions({
+      can_create: true,
+      can_view: true,
+      can_edit: true,
+      can_update: true,
+      can_delete: false
+    });
     setTasks([]);
     localStorage.removeItem('token');
     setCurrentPage(1);
